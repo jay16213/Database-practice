@@ -28,13 +28,17 @@ create view `WSWinnerTeam` as(
         T.WSWin = 'Y' and T.yearID between 1985 and 2004
 );
 
-/*create view WinnerMemberShip as
-(
-    select
-        W.yearID, W.teamID, S.playerID, S.salary
-    from
-        wswinner W, lahman2016.salaries S
-    where
-        W.teamID = S.teamID and
-        W.yearID = S.yearID
-);*/
+DROP VIEW IF EXISTS `TeamSalaries`;
+CREATE VIEW `TeamSalaries` AS(
+    SELECT
+        T.yearID, T.lgID, T.teamID, T.franchID, S.total_sal
+    FROM
+        Teams T, (
+            SELECT t.yearID, t.teamID, sum(t.salary) AS total_sal
+            FROM Salaries t
+            GROUP BY t.yearID, t.teamID
+        ) AS S
+    WHERE
+        T.yearID = S.yearID AND
+        T.teamID = S.teamID
+);
