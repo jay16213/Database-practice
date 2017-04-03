@@ -25,7 +25,7 @@ create view `WSWinnerTeam` as(
     from
         Teams T
     where
-        T.WSWin = 'Y' and T.yearID between 1985 and 2004
+        T.WSWin = 'Y'
 );
 
 DROP VIEW IF EXISTS `TeamSalaries`;
