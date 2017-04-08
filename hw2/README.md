@@ -1,11 +1,8 @@
 DataBase HW2
 =====
-#### 0416213 林彥傑
-
-- 所有sql, result的csv格式可至[此github連結](https://github.com/jay16213/Database-practice)
 
 ## Environment
-MySQL 5.7.17 with MySQL Workbench 6.3.9 CE
+MySQL 5.7.17 with MySQL Workbench 6.3.6 CE for linux
 
 ## 前置作業(方便以下的Query使用 , 避免sql太長)
 - 建 3 個 View : MaxSalaries, TeamSalaries, WSWinnerTeam
@@ -69,7 +66,7 @@ create view `WSWinnerTeam` as(
 );
 ```
 
-- [view sql檔案](https://github.com/jay16213/Database-practice/blob/master/view.sql)
+- [view sql檔案](https://github.com/jay16213/Database-practice/blob/master/hw2/view.sql)
 
 ## Query
 
@@ -79,7 +76,7 @@ SELECT COUNT(*)
 FROM Master;
 ```
 
-- result : 19105  
+- result : 19105([csv連結](https://github.com/jay16213/Database-practice/blob/master/hw2/q01/q1.csv))
 
 #### Q2: How many countries do the players come from ?
 ```sql
@@ -87,7 +84,7 @@ SELECT count(distinct M.birthCountry)
 FROM Master M;
 ```
 
-- result : 54  
+- result : 54 ([csv連結](https://github.com/jay16213/Database-practice/blob/master/hw2/q02/q2.csv))
 
 #### Q3: List yearID and playerID who hit the home run between 50 and 60.
 ```sql
@@ -96,7 +93,7 @@ FROM Batting B
 WHERE B.HR BETWEEN 50 AND 60;
 ```
 
-- result: https://github.com/jay16213/Database-practice/blob/master/q3.csv
+- result: [csv連結](https://github.com/jay16213/Database-practice/blob/master/hw2/q03/q3.csv)
 
 #### Q4: How many parks whose name contains ‘Stadium’ are recorded?
 ```sql
@@ -105,7 +102,7 @@ FROM Parks P
 WHERE P.`park.name` LIKE '%Stadium%';
 ```
 
-- result : 29  
+- result : 29 ([csv連結](https://github.com/jay16213/Database-practice/blob/master/hw2/q04/q4.csv))
 
 #### Q5: How long is the player’s career ?
 ```sql
@@ -113,7 +110,7 @@ SELECT AVG(M.finalGame - M.debut)
 FROM Master M;
 ```
 
-- result : 4.668254383669197  
+- result : 4.668254383669197 ([csv連結](https://github.com/jay16213/Database-practice/blob/master/hw2/q05/q5.csv))
 
 #### Q6: Find the players’ schools who made their debut at May 2000.
 ```sql
@@ -124,7 +121,7 @@ WHERE
     M.debut BETWEEN '2000-05-01' AND '2000-05-31';
 ```
 
-- result : https://github.com/jay16213/Database-practice/blob/master/q6.csv
+- result : [csv連結](https://github.com/jay16213/Database-practice/blob/master/hw2/q06/q6.csv)
 
 #### Q7: How much is the highest and average salary in each year ?
 
@@ -138,7 +135,7 @@ GROUP BY
     S.yearID;
 ```
 
-- result: https://github.com/jay16213/Database-practice/blob/master/q7-avg.csv
+- result: [csv連結](https://github.com/jay16213/Database-practice/blob/master/hw2/q07/q7-avg.csv)
 
 - 最高薪水
 ```sql
@@ -150,7 +147,7 @@ GROUP BY
     S.yearID;
 ```
 
-- result: https://github.com/jay16213/Database-practice/blob/master/q7-max.csv
+- result: [csv連結](https://github.com/jay16213/Database-practice/blob/master/hw2/q07/q7-max.csv)
 
 #### Q8: In the previous question, who are those highest paid players in each year ?
 ```sql
@@ -174,7 +171,7 @@ ORDER BY
     S.yearID ASC;
 ```
 
-- result: https://github.com/jay16213/Database-practice/blob/master/q8.csv
+- result: [csv連結](https://github.com/jay16213/Database-practice/blob/master/hw2/q08/q8.csv)
 
 #### Q9: List the salary and the player that is the highest paid player whose team win the World Series and the highest paid player in Boston Red Sox duaring the Curse of the Bambino.
 
@@ -202,15 +199,15 @@ ORDER BY
     S.yearID;
 ```
 
-- result: https://github.com/jay16213/Database-practice/blob/master/q9.csv
+- result: [csv連結](https://github.com/jay16213/Database-practice/blob/master/hw2/q09/q9.csv)
 
 #### Q10: Why Ichiro Suzuki is a good player? Answer by your own view.
 
 - 為求公平, 本題在大聯盟出賽平均只計當年度出賽超過81場之選手出賽數, 打擊數據平均只計當季打數超過486個的打者的數據(162場 x 每場平均3打數)
 
-- 出賽穩定無傷痛
+1. 出賽穩定無傷痛
 
-    - 鈴木一朗每季出賽數皆超過MLB每季平均20-30場 , 生涯16年平均出賽數約為147.1場
+- 鈴木一朗的每季平均出賽數皆超過MLB每季平均20-30場 , 生涯16年平均出賽數約為147.1場
 
 ```sql
 SELECT
@@ -225,17 +222,17 @@ GROUP BY
     B.yearID;
 ```
 
-- result: https://github.com/jay16213/Database-practice/blob/master/q10-game_played.csv
+- result: [csv連結](https://github.com/jay16213/Database-practice/blob/master/hw2/q10/q10-game_played.csv)
 
-- 打擊成績出色
+2. 打擊成績出色
 
-    - 2001 - 2010連續10年打擊率超過3成
+- 2001 - 2010連續10年打擊率超過3成
 
-    - 2001 - 2010連續10年單季安打數超過200支
+- 2001 - 2010連續10年單季安打數超過200支
 
-    - 大聯盟單季最多安打數紀錄保持人(2004年單季262支) , 至今無人能破
+- 大聯盟單季最多安打數紀錄保持人(2004年單季262支) , 至今無人能破
 
-    - 歷年單季總三振數為平均的1/2 - 2/3之間 , 顯示其選球能力及與投手纏鬥之能力
+- 歷年單季總三振數為平均的1/2 - 2/3之間 , 顯示其選球能力及與投手纏鬥之能力
 
 ```sql
 SELECT
@@ -264,7 +261,7 @@ GROUP BY
     B.yearID;
 ```
 
-- result: https://github.com/jay16213/Database-practice/blob/master/q10-batting.csv
+- result: [csv連結](https://github.com/jay16213/Database-practice/blob/master/hw2/q10/q10-batting.csv)
 
 #### Bonus: 找出歷年來團隊薪資最便宜 ＆ 最貴的世界大賽冠軍球隊
 ```sql
@@ -303,7 +300,7 @@ WHERE
 );
 ```
 
-- result : https://github.com/jay16213/Database-practice/blob/master/bonus.csv
+- result : [csv連結](https://github.com/jay16213/Database-practice/blob/master/hw2/q11_bonus/bonus.csv)
 
 <table style="border-collapse: collapse">
     <tr>
@@ -319,4 +316,4 @@ WHERE
 
 - 若不考慮通貨膨脹等問題 , 則由上述結果可知 , 1987年的馬林魚僅花費約640萬美金就贏得當年的世界大賽冠軍 , 2009年的洋基隊則花了2億多美金才贏得冠軍 , 是有薪資紀錄以來最豪華的奪冠球隊
 
-- 查詢MaxSalaries , 可知2009年洋基隊年薪最高的A-ROD當年年薪為3300萬美金，是640萬美金的5倍有餘
+- 搭配Q8 , 可知2009年洋基隊年薪最高的A-ROD當年年薪為3300萬美金 , 是640萬美金的5倍有餘
